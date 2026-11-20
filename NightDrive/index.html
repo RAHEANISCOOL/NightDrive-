@@ -1,0 +1,1309 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NightDrive | Automotive Hub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #080808;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        header {
+            background: #101010;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #292929;
+        }
+
+        header h1 {
+            color: #b7ff00;
+            letter-spacing: 3px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 10px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #b7ff00;
+        }
+
+        .hero {
+            min-height: 450px;
+            padding: 100px 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background:
+                linear-gradient(90deg, #080808 15%, #080808aa 65%, #08080855),
+                url("hero.jpg") center/cover;
+        }
+
+        .hero h2 {
+            font-size: 55px;
+            margin: 0;
+            max-width: 650px;
+        }
+
+        .green {
+            color: #b7ff00;
+        }
+
+        .hero p {
+            color: #bbb;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .button {
+            display: inline-block;
+            width: fit-content;
+            background: #b7ff00;
+            color: black;
+            padding: 14px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 65px 8%;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .feature {
+            background: #151515;
+            padding: 30px;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            border-color: #b7ff00;
+            transform: translateY(-5px);
+        }
+
+        .feature h3 {
+            color: #b7ff00;
+            font-size: 25px;
+        }
+
+        .panel {
+            background: #141414;
+            padding: 25px;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            margin-top: 25px;
+        }
+
+        label {
+            display: block;
+            color: #b7ff00;
+            margin: 15px 0 8px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 14px;
+            background: #222;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        select:focus {
+            outline: 1px solid #b7ff00;
+        }
+
+        button {
+            background: #b7ff00;
+            color: black;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 12px 8px 0 0;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .results {
+            display: none;
+            margin-top: 30px;
+            animation: reveal 0.6s ease;
+        }
+
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .car-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .car-title {
+            color: #b7ff00;
+            font-size: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            background: #222;
+            padding: 16px;
+            border-radius: 7px;
+        }
+
+        .stat small {
+            color: #999;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat strong {
+            color: white;
+        }
+
+        details {
+            background: #202020;
+            padding: 17px;
+            border-radius: 7px;
+            margin-top: 12px;
+        }
+
+        summary {
+            color: #b7ff00;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        details p {
+            color: #bbb;
+            line-height: 1.7;
+        }
+
+        .meter {
+            background: #333;
+            height: 12px;
+            border-radius: 20px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            background: #b7ff00;
+            width: 0;
+            transition: width 1s;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .compare-card {
+            background: #151515;
+            border: 1px solid #292929;
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 0;
+        }
+
+        .winner {
+            color: #b7ff00;
+            font-weight: bold;
+        }
+
+        .notice {
+            color: #999;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #101010;
+            padding: 30px;
+            text-align: center;
+            color: #888;
+            margin-top: 50px;
+        }
+
+        @media(max-width: 650px) {
+            .hero h2 {
+                font-size: 38px;
+            }
+
+            .feature-grid,
+            .comparison-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                justify-content: center;
+            }
+
+            nav {
+                text-align: center;
+            }
+        }
+        .lol{
+            color: #151515;
+        }
+
+.about-section {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 60px;
+}
+
+.about-section h2 {
+    color: #b7ff00;
+    font-size: 32px;
+}
+
+.about-section h3 {
+    color: white;
+}
+
+.about-section p {
+    max-width: 750px;
+    margin: 20px auto;
+    line-height: 1.8;
+    color: #ccc;
+}
+
+/* Scroll reveal animation */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+
+/* Staggered feature card animation */
+
+.feature.reveal {
+    opacity: 0;
+    transform: translateY(45px) scale(0.96);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.feature.reveal.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.feature-grid .feature:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.feature-grid .feature:nth-child(2) {
+    transition-delay: 0.35s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .feature.reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+.gallery-section {
+    padding: 70px 8%;
+    text-align: center;
+    color: white;
+}
+
+.gallery-section h2 {
+    color: #b7ff00;
+    font-size: 32px;
+}
+
+#gallerySearch {
+    padding: 14px;
+    width: 80%;
+    max-width: 400px;
+    margin: 25px;
+    border: 1px solid #b7ff00;
+    border-radius: 10px;
+    background: #151515;
+    color: white;
+}
+
+.car-gallery {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.gallery-card {
+    background: #151515;
+    border: 1px solid #333;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: left;
+    transition: 0.4s ease;
+    animation: galleryAppear 0.7s ease both;
+}
+
+.gallery-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: #b7ff00;
+    box-shadow: 0 10px 30px #b7ff0030;
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.gallery-card:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-info {
+    padding: 18px;
+}
+
+.gallery-info h3 {
+    color: #b7ff00;
+}
+
+.gallery-info p {
+    color: #bbb;
+    line-height: 1.5;
+}
+
+.gallery-card details {
+    color: white;
+    margin-top: 12px;
+}
+
+.gallery-card summary {
+    color: #b7ff00;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@keyframes galleryAppear {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gallery-card {
+        animation: none;
+        transition: none;
+    }
+}
+
+
+    </style>
+</head>
+
+<body>
+<h3 class="lol">created by Raj</h3>
+<header>
+
+    <h1>NIGHTDRIVE.</h1>
+
+    <nav>
+        <a href="#home">HOME</a>
+        <a href="#explorer">EXPLORER</a>
+        <a href="#compare">COMPARE</a>
+    </nav>
+</header>
+
+
+<!-- HERO SECTION -->
+
+<div class="hero" id="home">
+
+    <h2>DISCOVER THE WORLD OF <span class="green">CARS.</span></h2>
+
+    <p>
+        Explore legendary manufacturers, discover incredible
+        vehicles and compare some of the world's most exciting cars.
+    </p>
+
+    <a href="#explorer" class="button">START EXPLORING →</a>
+
+</div>
+
+
+<!-- FEATURE SECTION -->
+
+<section class="reveal">
+
+    <h2 class="section-title">YOUR AUTOMOTIVE EXPERIENCE</h2>
+
+    <p class="subtitle">
+        Everything you need to discover your favorite vehicles.
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature reveal">
+            <h3>01 / CAR EXPLORER</h3>
+            <p>
+                Choose a manufacturer, select a vehicle
+                and discover its specifications, interior,
+                performance and technology.
+            </p>
+            <a href="#explorer" class="button">EXPLORE CARS</a>
+        </div>
+
+        <div class="feature reveal">
+            <h3>02 / CAR COMPARISON</h3>
+            <p>
+                Choose two different vehicles and compare
+                their horsepower, engines, transmissions
+                and other specifications.
+            </p>
+            <a href="#compare" class="button">COMPARE CARS</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="gallery" class="gallery-section">
+    <h2>THE NIGHTDRIVE COLLECTION</h2>
+    <p>Explore some incredible machines.</p>
+
+    <input
+        type="text"
+        id="gallerySearch"
+        placeholder="Search for a car..."
+    >
+
+    <div id="carGallery" class="car-gallery"></div>
+</section>
+
+<!-- CAR EXPLORER -->
+
+<section id="explorer" class="reveal">
+
+    <h2 class="section-title">CAR <span class="green">EXPLORER.</span></h2>
+
+    <p class="subtitle">
+        Select a manufacturer and discover its lineup.
+    </p>
+
+    <div class="panel">
+
+        <label>SELECT MANUFACTURER</label>
+
+        <select id="brand" onchange="updateModels('brand','model')">
+            <option value="">Choose a company</option>
+        </select>
+
+        <label>SELECT MODEL</label>
+
+        <select id="model">
+            <option value="">Choose a manufacturer first</option>
+        </select>
+
+        <br>
+
+        <button onclick="exploreCar()">EXPLORE VEHICLE →</button>
+        <button onclick="resetExplorer()">RESET</button>
+
+    </div>
+
+    <div class="results" id="explorerResults">
+
+        <h2 class="car-title" id="explorerName"></h2>
+
+        <img id="explorerImage" class="car-image" src="" alt="Selected vehicle">
+
+        <div class="panel">
+
+            <h2>OVERVIEW</h2>
+            <p id="explorerDescription"></p>
+
+            <div class="stats-grid">
+
+                <div class="stat">
+                    <small>ENGINE</small>
+                    <strong id="engine"></strong>
+                </div>
+
+                <div class="stat">
+                    <small>HORSEPOWER</small>
+                    <strong id="horsepower"></strong>
+                </div>
+
+                <div class="stat">
+                    <small>TRANSMISSION</small>
+                    <strong id="transmission"></strong>
+                </div>
+
+                <div class="stat">
+                    <small>DRIVETRAIN</small>
+                    <strong id="drivetrain"></strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <h2>PERFORMANCE DISPLAY</h2>
+
+            <p>Horsepower</p>
+
+            <div class="meter">
+                <div class="meter-fill" id="powerMeter"></div>
+            </div>
+
+            <p id="powerText"></p>
+
+        </div>
+
+        <div class="panel">
+
+            <h2>DISCOVER MORE</h2>
+
+            <details>
+                <summary>ENGINE AND PERFORMANCE</summary>
+                <p id="performance"></p>
+            </details>
+
+            <details>
+                <summary>INTERIOR AND COMFORT</summary>
+                <p id="interior"></p>
+            </details>
+
+            <details>
+                <summary>TECHNOLOGY</summary>
+                <p id="technology"></p>
+            </details>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CAR COMPARISON -->
+
+<section id="compare" class="reveal">
+
+    <h2 class="section-title">CAR <span class="green">COMPARISON.</span></h2>
+
+    <p class="subtitle">
+        Choose two vehicles and discover their differences.
+    </p>
+
+    <div class="panel">
+
+        <h2>FIRST VEHICLE</h2>
+
+        <label>MANUFACTURER</label>
+
+        <select id="brand1" onchange="updateModels('brand1','model1')">
+            <option value="">Choose manufacturer</option>
+        </select>
+
+        <label>MODEL</label>
+
+        <select id="model1">
+            <option value="">Choose manufacturer first</option>
+        </select>
+
+
+        <h2>SECOND VEHICLE</h2>
+
+        <label>MANUFACTURER</label>
+
+        <select id="brand2" onchange="updateModels('brand2','model2')">
+            <option value="">Choose manufacturer</option>
+        </select>
+
+        <label>MODEL</label>
+
+        <select id="model2">
+            <option value="">Choose manufacturer first</option>
+        </select>
+
+        <button onclick="compareCars()">COMPARE VEHICLES →</button>
+        <button onclick="resetCompare()">RESET</button>
+
+    </div>
+
+    <div class="results" id="compareResults">
+
+        <h2>THE RESULTS</h2>
+
+        <div class="comparison-grid">
+
+            <div class="compare-card">
+                <h2 id="name1"></h2>
+                <img id="image1" class="car-image" src="" alt="First car">
+                <div class="stat">Engine: <strong id="engine1"></strong></div>
+                <div class="stat">Horsepower: <strong id="hp1"></strong></div>
+                <div class="stat">Transmission: <strong id="trans1"></strong></div>
+                <div class="stat">Drivetrain: <strong id="drive1"></strong></div>
+            </div>
+
+            <div class="compare-card">
+                <h2 id="name2"></h2>
+                <img id="image2" class="car-image" src="" alt="Second car">
+                <div class="stat">Engine: <strong id="engine2"></strong></div>
+                <div class="stat">Horsepower: <strong id="hp2"></strong></div>
+                <div class="stat">Transmission: <strong id="trans2"></strong></div>
+                <div class="stat">Drivetrain: <strong id="drive2"></strong></div>
+            </div>
+
+        </div>
+
+        <div class="panel">
+            <h2>HORSEPOWER WINNER</h2>
+            <h3 class="winner" id="winner"></h3>
+            <p class="notice">
+                The result compares the listed horsepower figures.
+                It does not determine which car is better overall.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="about" class="about-section">
+    <h2>About the Creator</h2>
+
+    <h3>Made by the creator of NightDrive</h3>
+
+    <p>
+        Hey! My name is Raj, and I am the creator of NightDrive.
+        I built this website because of my passion for cars and
+        automotive design. I wanted to create a place where people
+        can explore different vehicles, learn about their features,
+        and compare some of the world's most interesting cars.
+    </p>
+
+    <p>
+        NightDrive is a project that combines my interest in
+        automobiles with my love for technology and website
+        development. I hope you enjoy exploring the gallery as
+        much as I enjoyed creating it!
+    </p>
+
+    <h3>Thanks for visiting NightDrive!</h3>
+</section>
+
+
+<footer>
+    <h2>NIGHTDRIVE.</h2>
+    <p>YOUR IDEAL VEHICLE AWAITS HERE.</p>
+    <p>© 2026 NightDrive. All rights reserved.</p>
+    <p>Disclaimer
+
+This website is an independent educational project created solely for learning and educational purposes.
+This website is not affiliated with, sponsored by, or endorsed by Tesla, BMW, Ferrari, or any other automobile manufacturer.
+All company names, brand names, trademarks, logos, and vehicle images belong to their respective owners. Vehicle specifications, features, and prices are provided for informational purposes only and may change without notice.
+Information is collected from publicly available sources, including official manufacturer websites. Original sources are credited and linked wherever possible.
+No ownership of third-party content is claimed. All rights to third-party materials remain with their respective owners.
+This project is not intended for commercial use or to mislead visitors into believing it is an official automobile company website.</p>
+</footer>
+
+
+<script>
+
+// CAR DATABASE
+
+const cars = {
+
+    BMW: {
+        "M4 Competition": {
+    image: "m4.jpg",
+    hp: 503,
+    engine: "3.0L Twin-Turbo Inline-6",
+    transmission: "8-Speed Automatic",
+    drivetrain: "RWD / AWD",
+    description: "A high-performance luxury coupe with aggressive styling.",
+    performance: "Powerful acceleration and sporty handling.",
+    interior: "A modern cabin with sport seats and premium materials.",
+    technology: "Digital displays, infotainment and driver assistance."
+    },
+        "M3 Competition": {
+            image: "bmw.jpg",
+            hp: 523,
+            engine: "3.0L Twin-Turbo Inline-6",
+            transmission: "8-Speed Automatic",
+            drivetrain: "RWD / AWD",
+            description: "A high-performance sports sedan combining luxury, technology and exciting driving performance.",
+            performance: "A twin-turbocharged engine, responsive handling and performance-focused suspension.",
+            interior: "A driver-focused cockpit with sport seats, premium materials and digital displays.",
+            technology: "Modern infotainment, digital instruments and available driver assistance features."
+        },
+
+        "M5 Touring": {
+            image: "m5.jpg",
+            hp: 717,
+            engine: "4.4L Twin-Turbo V8 Plug-in Hybrid",
+            transmission: "8-Speed Automatic",
+            drivetrain: "AWD",
+            description: "A powerful luxury performance wagon combining V8 power with electric assistance.",
+            performance: "High-performance hybrid power with all-wheel drive.",
+            interior: "Luxury seating, premium materials and a modern digital cockpit.",
+            technology: "Connected infotainment and advanced driver assistance."
+        },
+
+        "M340i": {
+            image: "m340i.jpg",
+            hp: 386,
+            engine: "3.0L Turbo Inline-6",
+            transmission: "8-Speed Automatic",
+            drivetrain: "RWD / AWD",
+            description: "A sporty luxury sedan with a powerful six-cylinder engine.",
+            performance: "Strong acceleration and balanced everyday performance.",
+            interior: "Sporty design with comfortable seating and modern technology.",
+            technology: "Digital displays, navigation and driver assistance."
+        }
+    },
+
+    Tesla: {
+        "Model S": {
+            image: "tesla.jpg",
+            hp: 670,
+            engine: "Dual Electric Motors",
+            transmission: "Single-Speed",
+            drivetrain: "AWD",
+            description: "An all-electric luxury sedan focused on technology and performance.",
+            performance: "Instant electric torque and smooth acceleration.",
+            interior: "Minimalist cabin with a large touchscreen.",
+            technology: "Navigation, touchscreen controls and available driver assistance."
+        },
+
+        "Model X": {
+            image: "modelx.jpg",
+            hp: 670,
+            engine: "Dual Electric Motors",
+            transmission: "Single-Speed",
+            drivetrain: "AWD",
+            description: "An electric SUV with distinctive falcon-wing rear doors.",
+            performance: "Electric performance with room for passengers and luggage.",
+            interior: "Spacious cabin with a minimalist dashboard.",
+            technology: "Large touchscreen and connected vehicle features."
+        },
+
+        "Model 3": {
+            image: "model3.jpg",
+            hp: 295,
+            engine: "Electric Motor",
+            transmission: "Single-Speed",
+            drivetrain: "RWD / AWD",
+            description: "An electric sedan designed for everyday driving and modern technology.",
+            performance: "Smooth electric acceleration and responsive handling.",
+            interior: "Minimalist cabin with a central touchscreen.",
+            technology: "Navigation, touchscreen controls and connected features."
+        }
+    },
+
+    Toyota: {
+        "Prius": {
+            image: "prius.jpg",
+            hp: 194,
+            engine: "2.0L 4-Cylinder Hybrid",
+            transmission: "e-CVT",
+            drivetrain: "FWD / AWD",
+            description: "A hybrid vehicle focused on efficiency and everyday practicality.",
+            performance: "Combines gasoline and electric power.",
+            interior: "Comfortable seating and modern displays.",
+            technology: "Touchscreen infotainment and safety technology."
+        },
+
+        "Camry": {
+            image: "camry.jpg",
+            hp: 225,
+            engine: "2.5L 4-Cylinder Hybrid",
+            transmission: "e-CVT",
+            drivetrain: "FWD / AWD",
+            description: "A midsize sedan with comfortable seating and hybrid power.",
+            performance: "Smooth acceleration and efficient driving.",
+            interior: "Spacious cabin and modern dashboard.",
+            technology: "Touchscreen infotainment and driver assistance."
+        },
+
+        "Corolla": {
+            image: "corolla.jpg",
+            hp: 169,
+            engine: "2.0L 4-Cylinder",
+            transmission: "CVT",
+            drivetrain: "FWD",
+            description: "A compact car designed for practical everyday transportation.",
+            performance: "Balanced everyday driving performance.",
+            interior: "Comfortable and practical interior.",
+            technology: "Modern infotainment and safety features."
+        }
+    },
+
+    Mercedes: {
+        "G-Class": {
+            image: "gclass.jpg",
+            hp: 443,
+            engine: "3.0L Turbo Inline-6",
+            transmission: "9-Speed Automatic",
+            drivetrain: "AWD",
+            description: "An iconic luxury SUV with distinctive styling and off-road capability.",
+            performance: "Designed for road comfort and off-road driving.",
+            interior: "Premium materials and comfortable seating.",
+            technology: "Digital displays and advanced vehicle controls."
+        },
+
+        "C-Class": {
+            image: "cclass.jpg",
+            hp: 255,
+            engine: "2.0L Turbo Inline-4",
+            transmission: "9-Speed Automatic",
+            drivetrain: "RWD / AWD",
+            description: "A luxury sedan with elegant styling and modern technology.",
+            performance: "Smooth acceleration and comfortable handling.",
+            interior: "Modern cabin with premium materials.",
+            technology: "Digital displays and infotainment features."
+        },
+
+        "GLE": {
+            image: "gle.jpg",
+            hp: 255,
+            engine: "2.0L Turbo Inline-4",
+            transmission: "9-Speed Automatic",
+            drivetrain: "AWD",
+            description: "A luxury SUV offering comfort, space and modern technology.",
+            performance: "Designed for comfortable everyday driving.",
+            interior: "Spacious cabin with premium finishes.",
+            technology: "Modern infotainment and driver assistance."
+        }
+    },
+
+    Porsche: {
+        "911 Carrera": {
+            image: "porsche.jpg",
+            hp: 388,
+            engine: "3.0L Twin-Turbo Flat-6",
+            transmission: "8-Speed PDK",
+            drivetrain: "RWD",
+            description: "An iconic sports car known for its distinctive design and driving experience.",
+            performance: "Rear-engine design and responsive handling.",
+            interior: "Driver-focused cockpit and premium materials.",
+            technology: "Digital instrument display and modern infotainment."
+        },
+
+        "Taycan": {
+            image: "taycan.jpg",
+            hp: 402,
+            engine: "Electric Motors",
+            transmission: "2-Speed Automatic",
+            drivetrain: "RWD / AWD",
+            description: "An all-electric sports sedan with Porsche styling.",
+            performance: "Electric power and responsive handling.",
+            interior: "Modern cockpit with premium materials.",
+            technology: "Digital displays and connected features."
+        }
+    },
+
+    Honda: {
+        "Civic": {
+            image: "civic.jpg",
+            hp: 150,
+            engine: "2.0L 4-Cylinder",
+            transmission: "CVT",
+            drivetrain: "FWD",
+            description: "A compact car combining practicality and modern styling.",
+            performance: "Designed for comfortable everyday driving.",
+            interior: "Practical cabin with comfortable seating.",
+            technology: "Touchscreen infotainment and safety features."
+        },
+
+        "Accord": {
+            image: "accord.jpg",
+            hp: 192,
+            engine: "1.5L Turbo Inline-4",
+            transmission: "CVT",
+            drivetrain: "FWD",
+            description: "A midsize sedan offering comfort and everyday practicality.",
+            performance: "Smooth acceleration and comfortable handling.",
+            interior: "Spacious cabin and modern dashboard.",
+            technology: "Digital displays and driver assistance."
+        }
+    }
+
+};
+
+
+function loadBrands() {
+
+    let menus = ["brand", "brand1", "brand2"];
+
+    menus.forEach(function(id) {
+
+        let menu = document.getElementById(id);
+
+        for (let brand in cars) {
+
+            let option = document.createElement("option");
+
+            option.value = brand;
+            option.textContent = brand;
+
+            menu.appendChild(option);
+
+        }
+
+    });
+
+}
+
+
+// UPDATE MODEL MENUS
+
+function updateModels(brandId, modelId) {
+
+    let brand = document.getElementById(brandId).value;
+    let modelMenu = document.getElementById(modelId);
+
+    modelMenu.innerHTML = '<option value="">Choose a model</option>';
+
+    document.getElementById("explorerResults").style.display = "none";
+    document.getElementById("compareResults").style.display = "none";
+
+    if (!brand) return;
+
+    for (let model in cars[brand]) {
+
+        let option = document.createElement("option");
+
+        option.value = model;
+        option.textContent = model;
+
+        modelMenu.appendChild(option);
+
+    }
+
+}
+
+
+// SHOW CAR INFORMATION
+
+function exploreCar() {
+
+    let brand = document.getElementById("brand").value;
+    let model = document.getElementById("model").value;
+
+    if (!brand || !model) {
+        alert("Please select a manufacturer and a car!");
+        return;
+    }
+
+    let car = cars[brand][model];
+
+    document.getElementById("explorerResults").style.display = "block";
+
+    document.getElementById("explorerName").textContent =
+        brand + " " + model;
+
+    document.getElementById("explorerImage").src = car.image;
+
+    document.getElementById("explorerDescription").textContent = car.description;
+
+    document.getElementById("engine").textContent = car.engine;
+    document.getElementById("horsepower").textContent = car.hp + " HP";
+    document.getElementById("transmission").textContent = car.transmission;
+    document.getElementById("drivetrain").textContent = car.drivetrain;
+
+    document.getElementById("performance").textContent = car.performance;
+    document.getElementById("interior").textContent = car.interior;
+    document.getElementById("technology").textContent = car.technology;
+
+    document.getElementById("powerText").textContent =
+        car.hp + " horsepower";
+
+    document.getElementById("powerMeter").style.width =
+        Math.min(car.hp / 800 * 100, 100) + "%";
+
+    document.getElementById("explorerResults").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+// RESET EXPLORER
+
+function resetExplorer() {
+
+    document.getElementById("brand").value = "";
+
+    document.getElementById("model").innerHTML =
+        '<option value="">Choose a manufacturer first</option>';
+
+    document.getElementById("explorerResults").style.display = "none";
+
+}
+
+
+// COMPARE CARS
+
+function compareCars() {
+
+    let brand1 = document.getElementById("brand1").value;
+    let model1 = document.getElementById("model1").value;
+
+    let brand2 = document.getElementById("brand2").value;
+    let model2 = document.getElementById("model2").value;
+
+    if (!brand1 || !model1 || !brand2 || !model2) {
+        alert("Please select both cars!");
+        return;
+    }
+
+    if (brand1 === brand2 && model1 === model2) {
+        alert("Please select two different cars!");
+        return;
+    }
+
+    let car1 = cars[brand1][model1];
+    let car2 = cars[brand2][model2];
+
+    document.getElementById("compareResults").style.display = "block";
+
+    document.getElementById("name1").textContent = brand1 + " " + model1;
+    document.getElementById("name2").textContent = brand2 + " " + model2;
+
+    document.getElementById("image1").src = car1.image;
+    document.getElementById("image2").src = car2.image;
+
+    document.getElementById("engine1").textContent = car1.engine;
+    document.getElementById("engine2").textContent = car2.engine;
+
+    document.getElementById("hp1").textContent = car1.hp + " HP";
+    document.getElementById("hp2").textContent = car2.hp + " HP";
+
+    document.getElementById("trans1").textContent = car1.transmission;
+    document.getElementById("trans2").textContent = car2.transmission;
+
+    document.getElementById("drive1").textContent = car1.drivetrain;
+    document.getElementById("drive2").textContent = car2.drivetrain;
+
+    let winner;
+
+    if (car1.hp > car2.hp) {
+        winner = brand1 + " " + model1 + " has more horsepower!";
+    } else if (car2.hp > car1.hp) {
+        winner = brand2 + " " + model2 + " has more horsepower!";
+    } else {
+        winner = "Both cars have the same horsepower!";
+    }
+
+    document.getElementById("winner").textContent = winner;
+
+    document.getElementById("compareResults").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+// RESET COMPARISON
+
+function resetCompare() {
+
+    document.getElementById("brand1").value = "";
+    document.getElementById("brand2").value = "";
+
+    document.getElementById("model1").innerHTML =
+        '<option value="">Choose manufacturer first</option>';
+
+    document.getElementById("model2").innerHTML =
+        '<option value="">Choose manufacturer first</option>';
+
+    document.getElementById("compareResults").style.display = "none";
+
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const elements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    elements.forEach(function(element) {
+        observer.observe(element);
+    });
+});
+
+function renderCarGallery() {
+    const gallery = document.getElementById("carGallery");
+    const search = document.getElementById("gallerySearch");
+
+    function displayCars(searchText = "") {
+        gallery.innerHTML = "";
+
+        let count = 0;
+
+        for (const brand in cars) {
+            for (const model in cars[brand]) {
+                const car = cars[brand][model];
+
+                const fullName = brand + " " + model;
+
+                if (!fullName.toLowerCase().includes(searchText.toLowerCase())) {
+                    continue;
+                }
+
+                const card = document.createElement("div");
+                card.className = "gallery-card";
+                card.style.animationDelay = (count * 0.08) + "s";
+
+                card.innerHTML = `
+                    <img src="${car.image}" alt="${fullName}">
+
+                    <div class="gallery-info">
+                        <h3>${fullName}</h3>
+
+                        <p>${car.hp} HP</p>
+
+                        <details>
+                            <summary>Discover this car</summary>
+
+                            <p>${car.description}</p>
+                            <p><b>Engine:</b> ${car.engine}</p>
+                            <p><b>Transmission:</b> ${car.transmission}</p>
+                            <p><b>Drivetrain:</b> ${car.drivetrain}</p>
+                        </details>
+                    </div>
+                `;
+
+                gallery.appendChild(card);
+                count++;
+            }
+        }
+
+        if (count === 0) {
+            gallery.innerHTML = "<p>No cars found. Try another search!</p>";
+        }
+    }
+
+    displayCars();
+
+    search.addEventListener("input", function() {
+        displayCars(search.value);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", renderCarGallery);
+
+
+// START WEBSITE
+
+loadBrands();
+
+</script>
+
+</body>
+</html>
